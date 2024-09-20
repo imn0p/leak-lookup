@@ -57,7 +57,7 @@ def search_leak(api_key, search_type, query):
         'query': query
     }
 
-    response = requests.get(url, params=params)
+    response = requests.post(url, data=params)
     if response.status_code == 200:
         return response.json()
     else:
@@ -75,8 +75,7 @@ def main():
 
     if args.config:
         save_api_key(args.config)
-        sys.exit(0)
-
+        
     api_key = get_api_key()
     if not api_key:
         print("API key not found. Use --config <api-key> to save your API key.")
@@ -92,4 +91,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
